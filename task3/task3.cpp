@@ -31,7 +31,7 @@ PatientNode* Dequeue()
 	{
 		return NULL;
 	}
-	PatientNode *temp = head;
+	PatientNode *temp = head->next;
 	if (head->next != NULL) {
 		head = temp->next;
 	}
