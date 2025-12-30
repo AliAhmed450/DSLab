@@ -59,7 +59,7 @@ void Enqueue(PatientNode* node)
 		return;
 	}
 	PatientNode* temp = head;
-	while (temp->next != NULL) 
+	while (temp != NULL) 
 	{
 		if(temp->priority >= node->priority )
 		{
