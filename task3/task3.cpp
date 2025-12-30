@@ -52,7 +52,7 @@ void Enqueue(PatientNode* node)
 		tail = node;
 		return;
 	}
-	else if(head->priority < node->priority)
+	else if(head->priority > node->priority)
 	{
 		node->next = head;
 		head = node;
@@ -61,7 +61,7 @@ void Enqueue(PatientNode* node)
 	PatientNode* temp = head;
 	while (temp->next != NULL) 
 	{
-		if(temp->priority > node->priority && temp->next->priority <= node->priority)
+		if(temp->priority >= node->priority )
 		{
 			node->next = temp->next;
 			temp->next = node;
