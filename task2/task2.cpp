@@ -12,6 +12,11 @@ int findPartition(int arr[],int left,int right)
 		}
 		return findPartition(arr,left,mid);
 	}
+  
+  if(arr[mid] > -1 && arr[mid + 1] < 0 )
+  {
+    return mid + 1;
+  }
 	return findPartition(arr,mid,right);
 }
 void rearrangearray(int arr[],int start,int end)
@@ -40,7 +45,7 @@ void rearrage(int arr[],const int size)
 int main()
 {
 	const int size = 10;
-	int arr[size] = {1,5,7,8,15,16,26,-7,-22,-67};
+	int arr[size] = {1,5,7,8,15,16,-1,-7,-22,-67};
 
 	rearrage(arr,size);
 	for(auto x : arr)
