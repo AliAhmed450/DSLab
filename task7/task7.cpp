@@ -7,35 +7,41 @@ struct Node
 	Node *next;
 };
 
- void removeConsecutives(Node *head, int k) {
-    int i = 0;
-    Node *parent = NULL;
-    Node *temp = head;
-    Node *seqStart = NULL;
+void removeConsecutives(Node* &head, int k) {
+    if (!head || k <= 0) return;
 
-    while (temp != NULL) {
-        if (temp->value == 0) {
-            i += 1;
-            if (!seqStart)
-                seqStart = parent;
+    Node dummy;
+    dummy.next = head;
 
-            parent  = temp;
-            temp = temp->next;
-            continue;
+    Node* prev = &dummy;
+    Node* curr = head;
+
+    while (curr) {
+        Node* start = curr;
+        int count = 0;
+
+        // Count consecutive zeros
+        while (curr && curr->value == 0) {
+            count++;
+            curr = curr->next;
         }
 
-        if (i >= k) {
-            i = 0;
-            seqStart->next = temp;
-            seqStart = NULL;
-            parent = temp;
-            if (temp)
-                temp = temp->next;
+        // Remove if count >= k
+        if (count >= k) {
+            prev->next = curr->next;
+        } 
+
+        // Move prev to the last non-zero node
+        if (count < k) {
+            while (prev->next != curr)
+                prev = prev->next;
         }
-        
-                parent = temp;
-        if (temp)
-            temp = temp->next;
+        curr = curr->next;
     }
+
+    head = dummy.next;
 }
 
+int main(){
+  
+}
