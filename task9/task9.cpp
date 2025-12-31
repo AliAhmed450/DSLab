@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <iostream>
 using namespace std;
 
@@ -38,6 +39,8 @@ void InsertBack(Node* n)
 
 void DeleteFront()
 {
+  if(head == NULL)
+    return;
   Node* temp = head;
   head = head->next;
   delete temp;
@@ -45,6 +48,8 @@ void DeleteFront()
 
 void DeleteBack()
 {
+  if(head == NULL)
+    return;
   Node* temp = tail;
   tail = tail->prev;
   delete temp;
