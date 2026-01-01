@@ -80,6 +80,7 @@ int main() {
   else
     cout << "The list is not a palindrome.\n";
 
+  cout << endl << "After Restoring ";
   printList(head); // Confirm list is restored
   return 0;
 }

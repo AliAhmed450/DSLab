@@ -1,16 +1,18 @@
 #include <iostream>
 using namespace std;
 
-struct Node9 {
+struct Node8 {
   int data;
-  Node9 *next = NULL;
-  Node9(int x) { data = x; }
+  Node8 *next = NULL;
+  Node8(int x) { data = x; }
 };
 
-Node9 *head = NULL;
-Node9 *tail = NULL;
+struct task8
+{
+Node8 *head = NULL;
+Node8 *tail = NULL;
 
-void insertNode(Node9 *node) {
+void insertNode(Node8 *node) {
   if (head == NULL) {
     head = node;
     tail = node;
@@ -20,7 +22,7 @@ void insertNode(Node9 *node) {
   }
 }
 
-void deleteNode(Node9 *node) {
+void deleteNode(Node8 *node) {
   if (head == NULL) {
     return;
   }
@@ -28,7 +30,7 @@ void deleteNode(Node9 *node) {
     head = node->next;
     delete node;
   } else if (tail == node) {
-    Node9 *temp = head;
+    Node8 *temp = head;
     while (temp->next->next != NULL) {
       temp = temp->next;
     }
@@ -36,7 +38,7 @@ void deleteNode(Node9 *node) {
     delete temp->next; // delete last node
     temp->next = NULL;
   } else {
-    Node9 *temp = node;
+    Node8 *temp = node;
     while (temp) {
       if (temp->next == node) {
         temp->next = temp->next->next;
@@ -47,7 +49,7 @@ void deleteNode(Node9 *node) {
   }
 }
 
-void printList(Node9 *head) {
+void printList(Node8 *head) {
   while (head) {
     cout << head->data << " ";
     head = head->next;
@@ -56,14 +58,16 @@ void printList(Node9 *head) {
 }
 
 int main() {
-  Node9 *n = new Node9(10);
+  Node8 *n = new Node8(10);
   insertNode(n);
-  Node9 *p = new Node9(15);
+  Node8 *p = new Node8(15);
   insertNode(p);
-  Node9 *i = new Node9(13);
+  Node8 *i = new Node8(13);
   insertNode(i);
   cout << "\nList Before: ";
   printList(head);
   deleteNode(i);
   printList(head);
+  return 0;
 }
+};

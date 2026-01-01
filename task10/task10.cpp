@@ -1,35 +1,35 @@
 #include <iostream>
 using namespace std;
 
-struct NodeQ10 {
+struct Node {
     int data;
-    NodeQ10* next;
+    Node* next;
 };
 
 /* ---------- Utility Functions ---------- */
 
-NodeQ10* createNode(int data) {
-    NodeQ10* n = new NodeQ10();
+Node* createNode(int data) {
+    Node* n = new Node();
     n->data = data;
     n->next = NULL;
     return n;
 }
 
-void insertEnd(NodeQ10*& head, int data) {
-    NodeQ10* n = createNode(data);
+void insertEnd(Node*& head, int data) {
+    Node* n = createNode(data);
     if (!head) {
         head = n;
         return;
     }
 
-    NodeQ10* temp = head;
+    Node* temp = head;
     while (temp->next)
         temp = temp->next;
 
     temp->next = n;
 }
 
-void printList(NodeQ10* head) {
+void printList(Node* head) {
     while (head) {
         cout << head->data << " ";
         head = head->next;
@@ -38,11 +38,11 @@ void printList(NodeQ10* head) {
 }
 
 /* ---------- Merge Function ---------- */
-NodeQ10* merge(NodeQ10* a, NodeQ10* b) {
+Node* merge(Node* a, Node* b) {
     if (!a) return b;
     if (!b) return a;
     
-    NodeQ10* head;
+    Node* head;
     if (a->data <= b->data) {
       head = a; 
       a = a->next;
@@ -51,7 +51,7 @@ NodeQ10* merge(NodeQ10* a, NodeQ10* b) {
       b = b->next;
     }
 
-    NodeQ10 *temp = head;
+    Node *temp = head;
     while (a && b) {
       if (a->data <= b->data) {
         temp->next = a;
@@ -93,13 +93,13 @@ NodeQ10* merge(NodeQ10* a, NodeQ10* b) {
 
 /* ---------- Optimized Merge Sort ---------- */
 
-NodeQ10* mergeSort(NodeQ10* head) {
+Node* mergeSort(Node* head) {
     if (!head || !head->next)
         return head;
 
-    NodeQ10* slow = head;
-    NodeQ10* fast = head;
-    NodeQ10* prev = NULL;
+    Node* slow = head;
+    Node* fast = head;
+    Node* prev = NULL;
 
     bool alreadySorted = true;
 
@@ -120,8 +120,8 @@ NodeQ10* mergeSort(NodeQ10* head) {
     // Split list
     prev->next = NULL;
 
-    NodeQ10* left = mergeSort(head);
-    NodeQ10* right = mergeSort(slow);
+    Node* left = mergeSort(head);
+    Node* right = mergeSort(slow);
 
     // Optimization: skip merge if ordered
 
@@ -131,7 +131,7 @@ NodeQ10* mergeSort(NodeQ10* head) {
 /* ---------- Main ---------- */
 
 int main() {
-    NodeQ10* head = NULL;
+    Node* head = NULL;
 
     // Test Case 1 (Partially sorted)
     insertEnd(head, 1);

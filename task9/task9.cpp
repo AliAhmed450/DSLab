@@ -7,10 +7,15 @@ struct Node
   int value;
   Node* next;
   Node* prev;
+  Node(int x)
+  {
+    value=x;
+  }
 };
 
 Node* head = NULL;
 Node* tail = NULL;
+
 void InsertFront(Node* n)
 {
   if(head == NULL)
@@ -41,9 +46,8 @@ void DeleteFront()
 {
   if(head == NULL)
     return;
-  Node* temp = head;
   head = head->next;
-  delete temp;
+  delete head->prev;
 }
 
 void DeleteBack()
@@ -52,5 +56,32 @@ void DeleteBack()
     return;
   Node* temp = tail;
   tail = tail->prev;
+  tail->next = NULL;
   delete temp;
+}
+
+void printList(Node *head) {
+  while (head) {
+    cout << head->value << " ";
+    head = head->next;
+  }
+  cout << endl;
+}
+
+int main()
+{
+  Node* n = new Node(10);
+  InsertFront(n);
+  Node* i = new Node(15);
+  InsertBack(i);
+  Node* u = new Node(13);
+  InsertFront(u);
+  Node* r = new Node(8);
+  InsertBack(r);
+  printList(head);
+  DeleteFront();
+  printList(head);
+  DeleteBack();
+  printList(head);
+
 }

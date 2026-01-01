@@ -46,10 +46,19 @@ int main()
 {
 	const int size = 10;
 	int arr[size] = {1,5,7,8,15,16,-1,-7,-22,-67};
-
-	rearrage(arr,size);
+  cout << "Before: " << endl;
 	for(auto x : arr)
 	{
 		cout << x << " " ;
 	}
+
+  cout << endl;
+	rearrage(arr,size);
+  cout << "After: " << endl;
+	for(auto x : arr)
+	{
+		cout << x << " " ;
+	}
+  cout << endl;
+
 }
