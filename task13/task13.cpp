@@ -9,20 +9,14 @@ private:
 
 public:
     void push(int x) {
-        queue1.push(x);
+        queue2.push(x);
 
         while (!queue1.empty()) {
             queue2.push(queue1.front());
             queue1.pop();
 		}
 
-		while (!queue2.empty()) {
-			queue1.push(queue2.front());
-			queue2.pop();
-		}
-
-
-		//queue1.swap(queue2);
+		queue1.swap(queue2);
 	}
 
 	int pop() {
