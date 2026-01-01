@@ -1,78 +1,56 @@
 #include <iostream>
+#include <unordered_set>
 using namespace std;
 
-// Definition for singly-linked list
 struct Node {
     int data;
     Node* next;
-    
-    Node(int val) : data(val), next(nullptr) {}
+    Node(int val) {
+        data = val;
+        next = NULL;
+    }
 };
 
-// Function to remove duplicates from the linked list
 void removeDuplicates(Node* head) {
-    if (head == nullptr) return;  // Empty list
+    if (!head) return;
 
-    unordered_set<int> seen;  // To track unique elements
-    Node* current = head;
-    Node* prev = nullptr;
+    unordered_set<int> seen;
+    Node* curr = head;
+    Node* prev = NULL;
 
-    while (current != nullptr) {
-        // If current data is already in the set, skip the node
-        if (seen.find(current->data) != seen.end()) {
-            prev->next = current->next;  // Remove the current node
-            delete current;  // Free memory
+    while (curr != NULL) {
+        if (seen.find(curr->data) != seen.end()) {
+            prev->next = curr->next;
+            delete curr;
         } else {
-            seen.insert(current->data);  // Add to set if not present
-            prev = current;  // Move prev to current
+            seen.insert(curr->data);
+            prev = curr;
         }
-        current = prev->next;  // Move to the next node
+        curr = prev->next;
     }
 }
 
-// Function to print the linked list
+// Utility function
 void printList(Node* head) {
-    Node* current = head;
-    while (current != nullptr) {
-        cout << current->data << " ";
-        current = current->next;
+    while (head) {
+        cout << head->data << " -> ";
+        head = head->next;
     }
-    cout << endl;
-}
-
-// Helper function to insert nodes at the end of the list
-void insertNode(Node*& head, int data) {
-    Node* newNode = new Node(data);
-    if (head == nullptr) {
-        head = newNode;
-    } else {
-        Node* current = head;
-        while (current->next != nullptr) {
-            current = current->next;
-        }
-        current->next = newNode;
-    }
+    cout << "NULL\n";
 }
 
 int main() {
-    Node* head = nullptr;
+    Node* head = new Node(3);
+    head->next = new Node(5);
+    head->next->next = new Node(3);
+    head->next->next->next = new Node(7);
+    head->next->next->next->next = new Node(5);
 
-    // Insert nodes into the linked list
-    insertNode(head, 10);
-    insertNode(head, 20);
-    insertNode(head, 10);
-    insertNode(head, 30);
-    insertNode(head, 20);
-    insertNode(head, 40);
-
-    cout << "Original list: ";
+    cout << "Before: ";
     printList(head);
 
-    // Remove duplicates
     removeDuplicates(head);
 
-    cout << "List after removing duplicates: ";
+    cout << "After: ";
     printList(head);
-
-    return 0;
 }
