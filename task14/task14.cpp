@@ -1,64 +1,44 @@
 #include <iostream>
 #include <queue>
 #include <stack>
-
+#include <climits>
 using namespace std;
 
-// Function to sort the bogies using one queue and one stack
-void sortBogieQueue(queue<int>& queue1) {
-    stack<int> stack1;
-    queue<int> queue2;
 
-	stack1.push(queue1.front());
-	queue1.pop();
-	while (!queue1.empty()) {
+void sortBogies(queue<int>& Q1) {
+    queue<int> Q2;   // extra queue (output)
+    stack<int> S;    // stack
 
-		int current = queue1.front();
-		queue1.pop();
+    while (!Q1.empty()) {
+        int minVal = INT_MAX;
+        int n = Q1.size();
 
-		if(stack1.top() < current)
-		{
-			stack1.push(current);
-		}
-		else 
-		{
-			while(!stack1.empty())
-			{
-				if(stack1.top() < current)
-				{
-					stack1.push(current);
-					break;
-				}
-				queue2.push(stack1.top());
-				stack1.pop();
+        // Step 1: Move all elements to stack & find minimum
+        for (int i = 0; i < n; i++) {
+            int x = Q1.front();
+            Q1.pop();
+            minVal = min(minVal, x);
+            S.push(x);
+        }
 
-				if (stack1.empty()) 
-				{
-					stack1.push(current);
-					break;
-				}
-			}
-		}
-	}
-	while (!stack1.empty()) {
-	
-		queue2.push(stack1.top());
-		stack1.pop();
-	}
+        // Step 2: Move back except one min
+        while (!S.empty()) {
+            int x = S.top();
+            S.pop();
 
-	while(!queue2.empty())
-	{
-		stack1.push(queue2.front());
-		queue2.pop();
-	}
-	// Now all bogies in queue2 are sorted, transfer them back to queue1
-	while (!stack1.empty()) {
-		queue1.push(stack1.top());
-		stack1.pop();
-	}
+            if (x == minVal) {
+                Q2.push(x);      // send min to output queue
+            } else {
+                Q1.push(x);      // restore others
+            }
+        }
+    }
+
+    // Copy sorted result back to Q1
+    Q1 = Q2;
 }
 
-// Function to display the elements of the queue
+/// Function to display the elements of the queue
 void displayQueue(queue<int>& q) {
 	while (!q.empty()) {
 		cout << q.front() << " ";
@@ -71,13 +51,16 @@ int main() {
 	// Create a queue with unsorted bogie numbers
 	queue<int> queue1;
 	queue1.push(5);
-	queue1.push(2);
+	queue1.push(9);
 	queue1.push(4);
 	queue1.push(1);
 	queue1.push(3);
+	queue1.push(7);
+	queue1.push(1);
+	queue1.push(8);
 
 	// Sort the bogies using the described algorithm
-	sortBogieQueue(queue1);
+	sortBogies(queue1);
 
 	cout << "Sorted Queue: ";
 	displayQueue(queue1);
