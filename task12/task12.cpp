@@ -12,7 +12,7 @@ bool isClosing(char c) {
     return c == ')' || c == '}' || c == ']' || c == '>';
 }
 
-int main() {
+int mainFunc() {
     string expr;
     cout << "Enter expression: ";
 	getline(cin,expr);
@@ -78,4 +78,8 @@ int main() {
 
     cout << "Expression is balanced and valid ✅" << endl;
     return 0;
+}
+
+int main(){
+  mainFunc();
 }

@@ -6,10 +6,13 @@ struct task1 {
     if (rotationCount == 0)
       return;
 
+    int j = arr[size - 1];
+
     for (int i = size - 1; i >= 0; i--) {
       arr[i] = arr[i - 1];
     }
 
+    arr[0] = j;
     rotationCount--;
     rotateToRight(arr, size, rotationCount);
   }

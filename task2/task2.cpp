@@ -24,7 +24,8 @@ void rearrangearray(int arr[],int start,int end)
 	int temp = arr[end];
 	for( int i = end; i > start;i--)
 	{
-		swap(arr[i],arr[i-1]);
+    arr[i] = arr[i - 1];
+		//swap(arr[i],arr[i-1]);
 	}
 	arr[start] = temp; 
 }

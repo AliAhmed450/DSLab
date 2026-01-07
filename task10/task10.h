@@ -38,6 +38,15 @@ struct task10 {
     }
     cout << endl;
   }
+  bool isSorted(NodeQ10 *head) {
+    while (head && head->next) {
+      if (head->data > head->next->data)
+        return false;
+
+      head = head->next;
+    }
+    return true;
+  }
 
   /* ---------- Merge Function ---------- */
   NodeQ10 *merge(NodeQ10 *a, NodeQ10 *b) {
@@ -98,6 +107,10 @@ struct task10 {
   NodeQ10 *mergeSort(NodeQ10 *head) {
     if (!head || !head->next)
       return head;
+
+    if(isSorted(head)){
+      return head;
+    }
 
     NodeQ10 *slow = head;
     NodeQ10 *fast = head;

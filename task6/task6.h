@@ -42,7 +42,7 @@ struct task6 {
     return slow; // Starting node of loop
   }
 
-  int main() {
+ int main() {
     // Create nodes
     Node6 *A = new Node6('A');
     Node6 *B = new Node6('B');

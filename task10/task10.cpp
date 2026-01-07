@@ -37,6 +37,19 @@ void printList(Node* head) {
     cout << endl;
 }
 
+
+bool isSorted(Node* head)
+{
+    while (head && head->next)
+    {
+        if (head->data > head->next->data)
+            return false;
+
+        head = head->next;
+    }
+    return true;
+}
+
 /* ---------- Merge Function ---------- */
 Node* merge(Node* a, Node* b) {
     if (!a) return b;
@@ -66,36 +79,13 @@ Node* merge(Node* a, Node* b) {
   return head;
 }
 
-
-
-//NodeQ10* merge(NodeQ10* a, NodeQ10* b) {
-//    if (!a) return b;
-//    if (!b) return a;
-//
-//    NodeQ10 dummy;
-//    NodeQ10* tail = &dummy;
-//    dummy.next = NULL;
-//
-//    while (a && b) {
-//        if (a->data <= b->data) {
-//            tail->next = a;
-//            a = a->next;
-//        } else {
-//            tail->next = b;
-//            b = b->next;
-//        }
-//        tail = tail->next;
-//    }
-//
-//    tail->next = (a ? a : b);
-//    return dummy.next;
-//}
-
-/* ---------- Optimized Merge Sort ---------- */
-
 Node* mergeSort(Node* head) {
     if (!head || !head->next)
         return head;
+
+    if(isSorted(head)){
+      return head;
+    }
 
     Node* slow = head;
     Node* fast = head;

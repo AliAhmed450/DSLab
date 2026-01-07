@@ -83,8 +83,12 @@ struct task7 {
     insertEnd(0);
     insertEnd(0);
     insertEnd(1);
+    cout << "\nBefore Removing Consecutives: ";
+    cout << endl;
     printList(head);
     removeConsecutives(3);
+    cout << "\nAfter Removing Consecutives: ";
+    cout << endl;
     printList(head);
     return 0;
   }

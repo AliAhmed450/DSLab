@@ -16,13 +16,15 @@ struct task2 {
     }
     return findPartition(arr, mid, right);
   }
+
   void rearrangearray(int arr[], int start, int end) {
     int temp = arr[end];
     for (int i = end; i > start; i--) {
-      swap(arr[i], arr[i - 1]);
+      arr[i] = arr[i - 1];
     }
     arr[start] = temp;
   }
+
   void rearrage(int arr[], const int size) {
     int partition = findPartition(arr, 0, size - 1);
 
